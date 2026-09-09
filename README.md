@@ -34,8 +34,19 @@ export POKEME_API_KEY=pk_live_...
 **Channel broadcast** — `POST /api/v1/publish`:
 
 ```sh
-poke-me.sh --channel acme/news --title "Deploy done" --body "v1.4.2 is live"
+poke-me.sh --channel news --title "Deploy done" --body "v1.4.2 is live"
 ```
+
+A channel ref is relative to your organisation — never include the org slug. A
+bare name means a channel at the top level; a channel inside a namespace is
+addressed by its path:
+
+```sh
+poke-me.sh --channel apps/web/releases --title "Deploy done" --body "v1.4.2 is live"
+```
+
+The dashboard shows the exact ref for every channel, and a bare name will not
+find a channel that lives inside a namespace.
 
 **BYOA subject unicast** — `POST /api/v1/apps/{app}/notify`:
 
@@ -48,7 +59,8 @@ poke-me.sh --app lazy-sudoku --user rc-user-42 \
 
 ```
 TARGET (exactly one)
-  -c, --channel REF     channel slug or uuid
+  -c, --channel REF     channel uuid, or its org-relative path
+                        (`releases`, or `apps/web/releases`)
       --app APP         app slug or uuid          (with --user)
   -u, --user ID         external user id          (with --app)
 
