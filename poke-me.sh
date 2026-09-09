@@ -24,7 +24,9 @@ USAGE
   poke-me.sh --app APP --user EXTERNAL_ID --title T --body B ...  # BYOA unicast
 
 TARGET (exactly one)
-  -c, --channel REF     channel slug or uuid  → POST /api/v1/publish
+  -c, --channel REF     channel uuid, or its org-relative path:
+                        `releases`, or `apps/web/releases` for one
+                        inside a namespace  → POST /api/v1/publish
       --app APP         app slug or uuid      \
   -u, --user ID         external user id       } → POST /api/v1/apps/APP/notify
 
